@@ -1,3 +1,3 @@
 # Capston project
 
-### GOL -> (GAME OF LIFE)
+### GOL: (GAME OF LIFE)
