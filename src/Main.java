@@ -9,10 +9,9 @@ public class Main {
             System.out.println("There is not arguments provided");
             return;
         }
-        Map<String, String> config = createConfigDictionary(args); //Validate if the arguments are correct
-        if (!config.isEmpty()) {
-            showArgs(config);
-
+        Map<String, String> config = createConfigDictionary(args);
+        boolean showArgs = showArgs(config);//Validate if the arguments are correct
+        if (!config.isEmpty() && showArgs) {
             String population = config.get("population");
             int n = Integer.parseInt(config.get("width"));
             int m = Integer.parseInt(config.get("height"));
@@ -45,22 +44,29 @@ public class Main {
     //
     //Method to print the args depends on validation
     //
-    private static void showArgs(Map<String, String> config) {
-        // Validate and show width
-        validateAndShowValue("width", config.get("width"), true);
-        // Validate and show height
-        validateAndShowValue("height", config.get("height"), false);
-        // Validate and show generations
-        validateAndShowValue("generations", config.get("generations"), false);
-        // Validate and show speed
-        validateAndShowValue("speed", config.get("speed"), false);
-        // Validate and show population
-        validateAndShowValue("population", config.get("population"), false);
-        // Validate and show neighborhood
-        validateAndShowValue("neighborhood", config.get("neighborhood"), true);
+    private static boolean showArgs(Map<String, String> config) {
+        try {
+            // Validate and show width
+            validateInputs("width", config.get("width"), true);
+            // Validate and show height
+            validateInputs("height", config.get("height"), true);
+            // Validate and show generations
+            validateInputs("generations", config.get("generations"), true);
+            // Validate and show speed
+            validateInputs("speed", config.get("speed"), true);
+            // Validate and show population
+            validateInputs("population", config.get("population"), false);
+            // Validate and show neighborhood
+            validateInputs("neighborhood", config.get("neighborhood"), true);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("An error occurred, please try again and validate the inputs");
+            return false;
+        }
     }
 
-    private static void validateAndShowValue(String key, String value, boolean isInteger) {
+    private static void validateInputs(String key, String value, boolean isInteger) throws Exception {
         if (value == null || value.trim().isEmpty()) {
             System.out.println(key + "=[no present]");
         } else {
@@ -72,7 +78,7 @@ public class Main {
                     System.out.println(key + "=[" + value + "]");
                 }
             } catch (NumberFormatException e) {
-                System.out.println(key + "=[invalid]");
+                throw new Exception(key + "=[invalid]");
             }
         }
     }
@@ -102,7 +108,7 @@ public class Main {
         for (int i = 0; i < rows.length; i++) {
             String row = rows[i];
             for (int j = 0; j < row.length(); j++) {
-                if (row.charAt(j) == '1'){
+                if (row.charAt(j) == '1') {
                     matrix[i][j] = 1;
                 }
             }
