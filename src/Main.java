@@ -14,12 +14,15 @@ public class Main {
             showArgs(config);
 
             String population = config.get("population");
+            int n = Integer.parseInt(config.get("width"));
+            int m = Integer.parseInt(config.get("height"));
             if (population != null && !population.trim().isEmpty()) {
-                int[][] matrix = convertMatrix(population); //initial population
-                showInitialPopulation(new int[10][20]);
+                int[][] matrix = createMatrix(population, n, m); //initial population
+                printMatrix(matrix);
             }
 
-        }; //Show the arguments passed
+        }
+        ; //Show the arguments passed
 
         ClearTerminal.clear();
     }
@@ -95,19 +98,15 @@ public class Main {
     //
     //Method to convert to matrix
     //
-    public static int[][] convertMatrix(String input){
+    public static int[][] createMatrix(String input, int n, int m) {
+        int[][] matrix = new int[n][m];
         String[] rows = input.split("#");
-        int[][] matrix = new int[rows.length][];
 
         for (int i = 0; i < rows.length; i++) {
-            String[] cols = rows[i].split("");
-            matrix[i] = new int[cols.length];
-            for (int j = 0; j < cols.length; j++) {
-                try {
-                    matrix[i][j] = Integer.parseInt(cols[j]);
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: Invalid number format in matrix at position (" + i + "," + j + ")");
-                    matrix[i][j] = 0; //Default value or handle error as needed
+            String row = rows[i];
+            for (int j = 0; j < row.length(); j++) {
+                if (row.charAt(j) == '1'){
+                    matrix[i][j] = 1;
                 }
             }
         }
@@ -117,9 +116,9 @@ public class Main {
     //
     //Show initial population
     //
-    public static void showInitialPopulation(int[][] population) {
-        for (int[] row: population){
-            for (int colum: row){
+    public static void printMatrix(int[][] population) {
+        for (int[] row : population) {
+            for (int colum : row) {
                 System.out.print(colum + " ");
             }
             System.out.println();
