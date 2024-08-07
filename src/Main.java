@@ -20,10 +20,7 @@ public class Main {
                 int[][] matrix = createMatrix(population, n, m); //initial population
                 printMatrix(matrix);
             }
-
-        }
-        ; //Show the arguments passed
-
+        }//Show the arguments passed
         ClearTerminal.clear();
     }
 
