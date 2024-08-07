@@ -1,3 +1,5 @@
+import lib.ClearTerminal;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,11 +15,13 @@ public class Main {
 
             String population = config.get("population");
             if (population != null && !population.trim().isEmpty()) {
-                int[][] matrix = convertMatrix(population);
-                showInitialPopulation(matrix);
+                int[][] matrix = convertMatrix(population); //initial population
+                showInitialPopulation(new int[10][20]);
             }
 
         }; //Show the arguments passed
+
+        ClearTerminal.clear();
     }
 
     //
