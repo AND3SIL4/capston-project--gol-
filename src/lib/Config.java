@@ -12,7 +12,7 @@ public class Config {
         config.put("generations", null);
         config.put("speed", null);
         config.put("population", null);
-        config.put("neighborhood", "0");
+        config.put("neighborhood", "0");//Optional
 
         for (String arg : args) {
             String[] split = arg.split("=");

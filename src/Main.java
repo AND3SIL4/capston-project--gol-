@@ -1,4 +1,5 @@
 import lib.Config;
+import lib.Game;
 import lib.Matrix;
 import lib.Validations;
 
@@ -14,14 +15,19 @@ public class Main {
         boolean showArgs = Validations.showArgs(config);//Validate if the arguments are correct
         if (!config.isEmpty() && showArgs) {
             //Know the initial cell alive or dead
-            int rows = Integer.parseInt(config.get("width"));
-            int cols = Integer.parseInt(config.get("height"));
+            int height = Integer.parseInt(config.get("width"));
+            int width= Integer.parseInt(config.get("height"));
             String population = config.get("population");
 
             //Validate for creating the matrix
             if (population != null && !population.trim().isEmpty()) {
-                int[][] matrix = Matrix.createMatrix(population, rows, cols); //initial population
-                Matrix.printMatrix(matrix);
+                int[][] matrix = Matrix.createMatrix(population, width, height);//initial population
+                int g = Integer.parseInt(config.get("generations"));
+                for (int generations = 0; generations < g; generations++) {
+                    System.out.println("Generation #" + (generations + 1));
+                    Matrix.printMatrix(matrix);
+                    Game.game(matrix);
+                }
             }
         }//Show the arguments passed
     }
