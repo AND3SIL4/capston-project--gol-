@@ -16,16 +16,17 @@ public class Validations {
         };
     }
 
-    public static void validateInputs(String key, String value, boolean isInteger) throws Exception {
+    //Method to validate the args values and print it
+    private static void validateInputs(String key, String value, boolean isInteger) throws Exception {
         if (value == null || value.trim().isEmpty()) {
-            System.out.println(key + "=[no present]");
+            throw new Exception(key + "=[no present]");
         } else {
             try {
                 if (isInteger) {
                     Integer.parseInt(value);
-                    System.out.println(key + "=[" + value + "]");
+                    System.out.print(key + "=[" + value + "] ");
                 } else {
-                    System.out.println(key + "=[" + value + "]");
+                    System.out.print(key + "=[" + value + "] ");
                 }
             } catch (NumberFormatException e) {
                 throw new Exception(key + "=[invalid]");
@@ -36,22 +37,18 @@ public class Validations {
     //Method to print the args depends on validation
     public static boolean showArgs(Map<String, String> config) {
         try {
-            // Validate and show width
+            //Validate and show args
             validateInputs("width", config.get("width"), true);
-            // Validate and show height
             validateInputs("height", config.get("height"), true);
-            // Validate and show generations
             validateInputs("generations", config.get("generations"), true);
-            // Validate and show speed
             validateInputs("speed", config.get("speed"), true);
-            // Validate and show population
             validateInputs("population", config.get("population"), false);
-            // Validate and show neighborhood
             validateInputs("neighborhood", config.get("neighborhood"), true);
+            System.out.println();//Make a line jump to show the matrix bellow
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("An error occurred, please try again and validate the inputs");
+            System.out.println("⛔ The game is not allowed to continue ⛔");
             return false;
         }
     }

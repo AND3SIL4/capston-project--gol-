@@ -3,7 +3,6 @@ import lib.Matrix;
 import lib.Validations;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,12 +14,13 @@ public class Main {
         boolean showArgs = Validations.showArgs(config);//Validate if the arguments are correct
         if (!config.isEmpty() && showArgs) {
             //Know the initial cell alive or dead
+            int rows = Integer.parseInt(config.get("width"));
+            int cols = Integer.parseInt(config.get("height"));
             String population = config.get("population");
-            int n = Integer.parseInt(config.get("width"));
-            int m = Integer.parseInt(config.get("height"));
 
+            //Validate for creating the matrix
             if (population != null && !population.trim().isEmpty()) {
-                int[][] matrix = Matrix.createMatrix(population, n, m); //initial population
+                int[][] matrix = Matrix.createMatrix(population, rows, cols); //initial population
                 Matrix.printMatrix(matrix);
             }
         }//Show the arguments passed
