@@ -2,15 +2,14 @@ package lib;
 
 public class Matrix {
     //Method to convert to matrix
-    public static int[][] createMatrix(String input, int n, int m) {
-        int[][] matrix = new int[n][m];
-        String[] rows = input.split("#");
+    public static int[][] createMatrix(String input, int rows, int cols) {
+        int[][] matrix = new int[rows][cols];
+        String[] population = input.split("#");
 
-        for (int i = 0; i < rows.length; i++) {
-            String row = rows[i];
-            for (int j = 0; j < row.length(); j++) {
-                if (row.charAt(j) == '1') {
-                    matrix[i][j] = 1;
+        for (int row = 0; row < population.length; row++) {
+            for (int col = 0; col < population[row].length(); col++) {
+                if (population[row].charAt(col) == '1') {
+                    matrix[row][col] = 1;
                 }
             }
         }
