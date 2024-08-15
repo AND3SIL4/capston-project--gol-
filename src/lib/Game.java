@@ -56,6 +56,7 @@ public class Game {
         //Calculate rules depends on the neighbors
         int n = Integer.parseInt(config.get("neighborhood"));
         return switch (n) {
+            case 0 -> left + right + up + down + upLeft + upRight + downLeft + downRight;
             case 1 -> left + right + up + down;
             case 2 -> left + right + up + down + upLeft + downRight;
             case 3 -> left + right + up + down + upLeft + upRight + downLeft + downRight;
