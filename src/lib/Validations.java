@@ -21,7 +21,7 @@ public class Validations {
         if (value == null || value.trim().isEmpty()) {
             throw new Exception(key + "=[no present]");
         } else {
-            try {
+            try { //Try to parse the String value in dictionary
                 if (isInteger) {
                     Integer.parseInt(value);
                     System.out.print(key + "=[" + value + "] ");
@@ -29,6 +29,7 @@ public class Validations {
                     System.out.print(key + "=[" + value + "] ");
                 }
             } catch (NumberFormatException e) {
+                //Is an error happen throw an exception
                 throw new Exception(key + "=[invalid]");
             }
         }
