@@ -12,7 +12,7 @@ public class Config {
         config.put("generations", null);
         config.put("speed", null);
         config.put("population", null);
-        config.put("neighborhood", "3");//Optional
+        config.put("neighborhood", "0");//Optional
 
         //Validate and split the initial argument and send for validating arguments
         for (String arg : args) {
