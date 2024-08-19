@@ -65,4 +65,12 @@ public class Game {
             default -> throw new IllegalStateException("⛔ Verify the arg n=" + n + " and try again ⛔");
         };
     }
+
+    public static void inverse(int[][] matrix) {
+        for (int row = 0; row < matrix.length ; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                matrix[row][col] = matrix[row][col] == 1 ? 0 : 1;
+            }
+        }
+    }
 }

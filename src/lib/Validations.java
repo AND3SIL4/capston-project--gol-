@@ -12,6 +12,7 @@ public class Validations {
             case "s" -> "speed";
             case "p" -> "population";
             case "n" -> "neighborhood";
+            case "i" -> "inverse";
             default -> "arg not found";
         };
     }
@@ -45,6 +46,7 @@ public class Validations {
             validateInputs("speed", config.get("speed"), true);
             validateInputs("population", config.get("population"), false);
             validateInputs("neighborhood", config.get("neighborhood"), true);
+            validateInputs("inverse", config.get("inverse"), true);
             System.out.println();//Make a line jump to show the matrix bellow
             return true;
         } catch (Exception e) {
