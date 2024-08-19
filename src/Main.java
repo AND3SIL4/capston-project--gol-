@@ -36,7 +36,7 @@ public class Main {
                     boolean validateWidth = width != 10 && width != 20 && width != 30 && width != 40 && width != 80;
                     boolean validateHeight = height != 10 && height != 20 && height != 30 && height != 40;
                     if (validateWidth || validateHeight) {
-                        throw new Exception("Size value invalid");
+                        throw new Exception("size value invalid");
                     }
 
                     int[][] matrix = Matrix.createMatrix(population, height, width);//initial population
@@ -45,6 +45,7 @@ public class Main {
                     if (g < 0) throw new Exception("generations value not valid");
                     else if (g == 0) {
                         int generations = 0;
+                        int inverse = Integer.parseInt(config.get("inverse"));
                         while (true) {
                             //Execute speed
                             int s = Integer.parseInt(config.get("speed"));
@@ -52,26 +53,47 @@ public class Main {
                                 Thread.sleep(s);
                                 generations++;
                             } else {
-                                throw new Exception("Speed invalid");
+                                throw new Exception("speed invalid");
                             }
-                            System.out.println("Generation #" + (generations + 1));
-                            Matrix.printMatrix(matrix);//Print matrix
-                            Game.game(matrix, config);//Apply rules and update the initial matrix
+                            if (generations == 0) {
+                                Matrix.printMatrix(matrix);
+                                continue;
+                            }
 
+                            if (inverse == generations + 1) {
+                                System.out.println("Generation " + generations);
+                                Game.inverse(matrix);
+                                Matrix.printMatrix(matrix);
+                                continue;
+                            }
+
+                            System.out.println("Generation #" + (generations + 1));
+                            Game.game(matrix, config);//Apply rules and update the initial matrix
+                            Matrix.printMatrix(matrix);//Print matrix
                         }
                     } else {
                         for (int generations = 0; generations < g; generations++) {
+                            int inverse = Integer.parseInt(config.get("inverse"));
                             //Execute speed
                             int s = Integer.parseInt(config.get("speed"));
                             if (s >= 250 && s <= 1000) {
                                 Thread.sleep(s);
                             } else {
-                                throw new Exception("Speed invalid");
+                                throw new Exception("speed invalid");
+                            }
+                            if (generations == 0) {
+                                Matrix.printMatrix(matrix);
+                                continue;
+                            }
+                            if (inverse == generations + 1) {
+                                System.out.println("Generation #" + (generations + 1));
+                                Game.inverse(matrix);
+                                Matrix.printMatrix(matrix);
+                                continue;
                             }
                             System.out.println("Generation #" + (generations + 1));
-                            Matrix.printMatrix(matrix);//Print matrix
                             Game.game(matrix, config);//Apply rules and update the initial matrix
-
+                            Matrix.printMatrix(matrix);//Print matrix
                         }
                     }
                 } catch (Exception e) {

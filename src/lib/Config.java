@@ -13,6 +13,7 @@ public class Config {
         config.put("speed", null);
         config.put("population", null);
         config.put("neighborhood", "0");//Optional
+        config.put("inverse", "0");
 
         //Validate and split the initial argument and send for validating arguments
         for (String arg : args) {
