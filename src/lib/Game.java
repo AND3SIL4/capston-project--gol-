@@ -62,7 +62,7 @@ public class Game {
             case 3 -> left + right + up + down + upLeft + upRight + downLeft + downRight;
             case 4 -> upLeft + upRight + downLeft + downRight;
             case 5 ->  up + down + upLeft + upRight + downLeft + downRight;
-            default -> throw new IllegalStateException("⛔ Verify the arg n=" + n + " and try again ⛔");
+            default -> throw new IllegalStateException("⛔ verify the arg n=" + n + " and try again ⛔");
         };
     }
 

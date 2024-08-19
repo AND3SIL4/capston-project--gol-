@@ -16,7 +16,7 @@ public class Matrix {
                 matrix[row][col] = 1;
             }
         } else if (!input.contains("#")) {
-            throw new IllegalArgumentException("Validate this value: " + input + " and try again");
+            throw new IllegalArgumentException("validate this value: " + input + " and try again");
         } else {
             String[] population = input.split("#");//Get the list from initial population
             //Validate size is not bigger than matrix size
