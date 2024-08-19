@@ -49,25 +49,27 @@ public class Main {
                         while (true) {
                             //Execute speed
                             int s = Integer.parseInt(config.get("speed"));
+                            if (generations == 0) {
+                                System.out.println("Generations " + generations + 1);
+                                Matrix.printMatrix(matrix);
+                                generations++;
+                                continue;
+                            }
                             if (s >= 250 && s <= 1000) {
                                 Thread.sleep(s);
                                 generations++;
                             } else {
                                 throw new Exception("speed invalid");
                             }
-                            if (generations == 0) {
-                                Matrix.printMatrix(matrix);
-                                continue;
-                            }
 
                             if (inverse == generations + 1) {
-                                System.out.println("Generation " + generations);
+                                System.out.println("Generation " + generations + 1);
                                 Game.inverse(matrix);
                                 Matrix.printMatrix(matrix);
                                 continue;
                             }
 
-                            System.out.println("Generation #" + (generations + 1));
+                            System.out.println("Generation " + (generations + 1));
                             Game.game(matrix, config);//Apply rules and update the initial matrix
                             Matrix.printMatrix(matrix);//Print matrix
                         }
@@ -82,16 +84,17 @@ public class Main {
                                 throw new Exception("speed invalid");
                             }
                             if (generations == 0) {
+                                System.out.println("Generations " + generations + 1);
                                 Matrix.printMatrix(matrix);
                                 continue;
                             }
                             if (inverse == generations + 1) {
-                                System.out.println("Generation #" + (generations + 1));
+                                System.out.println("Generation " + (generations + 1));
                                 Game.inverse(matrix);
                                 Matrix.printMatrix(matrix);
                                 continue;
                             }
-                            System.out.println("Generation #" + (generations + 1));
+                            System.out.println("Generation " + (generations + 1));
                             Game.game(matrix, config);//Apply rules and update the initial matrix
                             Matrix.printMatrix(matrix);//Print matrix
                         }
