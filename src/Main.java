@@ -1,11 +1,9 @@
-import com.sun.tools.jconsole.JConsoleContext;
 import lib.Config;
 import lib.Game;
 import lib.Matrix;
 import lib.Validations;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * This class execute the main code
