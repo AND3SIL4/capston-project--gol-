@@ -1,9 +1,11 @@
+import com.sun.tools.jconsole.JConsoleContext;
 import lib.Config;
 import lib.Game;
 import lib.Matrix;
 import lib.Validations;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class execute the main code
@@ -32,38 +34,47 @@ public class Main {
                 try {
                     int height = Integer.parseInt(config.get("height"));
                     int width = Integer.parseInt(config.get("width"));
-                    if (
-                            width != 10 && width != 20 && width != 30 && width != 40 && width != 80
-                    ) throw new Exception("width value not valid");
-                    if (
-                            height != 10 && height != 20 && height != 30 && height != 40
-                    ) throw new Exception("height value not valid");
+                    //Validate the size of the matrix to allow execution
+                    boolean validateWidth = width != 10 && width != 20 && width != 30 && width != 40 && width != 80;
+                    boolean validateHeight = height != 10 && height != 20 && height != 30 && height != 40;
+                    if (validateWidth || validateHeight) {
+                        throw new Exception("Size value invalid");
+                    }
 
-                    int[][] matrix = Matrix.createMatrix(population, width, height);//initial population
+                    int[][] matrix = Matrix.createMatrix(population, height, width);//initial population
                     int g = Integer.parseInt(config.get("generations"));//Get the amount generations
                     //Display the matrix and game with the rules
                     if (g < 0) throw new Exception("generations value not valid");
                     else if (g == 0) {
                         int generations = 0;
                         while (true) {
+                            //Execute speed
+                            int s = Integer.parseInt(config.get("speed"));
+                            if (s >= 250 && s <= 1000) {
+                                Thread.sleep(s);
+                                generations++;
+                            } else {
+                                throw new Exception("Speed invalid");
+                            }
                             System.out.println("Generation #" + (generations + 1));
                             Matrix.printMatrix(matrix);//Print matrix
                             Game.game(matrix, config);//Apply rules and update the initial matrix
 
+                        }
+                    } else {
+                        for (int generations = 0; generations < g; generations++) {
                             //Execute speed
                             int s = Integer.parseInt(config.get("speed"));
-                            Thread.sleep(s);
-                            generations++;
-                        }
-                    }
-                    for (int generations = 0; generations < g; generations++) {
-                        System.out.println("Generation #" + (generations + 1));
-                        Matrix.printMatrix(matrix);//Print matrix
-                        Game.game(matrix, config);//Apply rules and update the initial matrix
+                            if (s >= 250 && s <= 1000) {
+                                Thread.sleep(s);
+                            } else {
+                                throw new Exception("Speed invalid");
+                            }
+                            System.out.println("Generation #" + (generations + 1));
+                            Matrix.printMatrix(matrix);//Print matrix
+                            Game.game(matrix, config);//Apply rules and update the initial matrix
 
-                        //Execute speed
-                        int s = Integer.parseInt(config.get("speed"));
-                        Thread.sleep(s);
+                        }
                     }
                 } catch (Exception e) {
                     System.out.print(e.getMessage());
